@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import Menu from "./components/Menu"
-import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Form } from 'react-bootstrap';
+
+
 
 function App() {
 
@@ -49,31 +51,33 @@ function App() {
   return (
     <Container fluid="md">      
       <Row>
-        <Col md="4">
-          <hr />
-          <h2>Gerador de listas</h2>
+        <Col sm={4}>
+          <h3>Gerador de listas</h3>
 
 
-          <form onSubmit={alterarTitulo}>
-            <label>Escolha um nome para sua lista:</label><br />
-            <input placeholder="Ex: Lista de compras ou Mercado, Tarefas, Convidados, Chá de bebê da Marisa, etc." value={inputTitulo} onChange={atribuiTitulo} />      
+          <Form onSubmit={alterarTitulo}>
+            <Form.Label><i>Nome da sua lista:</i></Form.Label><br />
+            <Form.Control placeholder="Ex: Lista de compras ou Mercado, Tarefas, Convidados, Chá de bebê da Marisa, etc." value={inputTitulo} onChange={atribuiTitulo} />      
                       
-            <button>Enviar</button>              
-          </form>
+            <button class="btn btn-primary">Enviar</button>              
+          </Form>
+        <br />
 
-
-            <form onSubmit={adicionarItem}>
-            <label>Escreva o item a ser adicionado na lista</label><br />
-            <input placeholder="Digite um item da sua lista" value={inputItem} onChange={atribuiItem} />
+          <Form onSubmit={adicionarItem}>
+          <Form.Label><i>Item a ser incluso:</i></Form.Label><br />
+            <Form.Control placeholder="Digite um item da sua lista" value={inputItem} onChange={atribuiItem} />
                       
-            <button>Enviar</button>
-          </form>
+            <button class="btn btn-primary">Incluir</button>
+            {/* <button class="btn btn-secondary" type="reset">Limpar</button> */}
+
+            <br />
+          </Form>
 
           <br />
           <hr />
         </Col>
 
-        <Col md="8">
+        <Col sm={8}>
           <h1>{titulo}</h1><br />         
 
           {item.map((item, index) => {
