@@ -19,16 +19,20 @@ function App() {
   const dispatch = useDispatch();
 
 
-  function alterarTitulo (event) {
+  function atribuiTitulo (event) {
     setInputTitulo(event.target.value)
-    dispatch({type: "alterar", value: event.target.value})
-  }
+  };
 
+  function alterarTitulo (event) {
+    event.preventDefault();    
+    dispatch({type: "alterar", value: inputTitulo})
+  };
+
+  
   function atribuiItem (event) {
-    setInputItem(event.target.value)    
-  }
+    setInputItem(event.target.value)   
+  };
 
-        
 
   function adicionarItem(event) {
     event.preventDefault();
@@ -39,32 +43,34 @@ function App() {
 
     dispatch({type: "adicionar", value: listaItem});
 
-  }
-
- 
-
-
-  
-  
+  };
+   
 
   return (
     <Container fluid="md">      
       <Row>
         <Col md="4">
+          <hr />
           <h2>Gerador de listas</h2>
 
-          <form>
+
+          <form onSubmit={alterarTitulo}>
             <label>Escolha um nome para sua lista:</label><br />
-            <input placeholder="Ex: Lista de compras ou Mercado, Tarefas, Convidados, Chá de bebê da Marisa, etc." value={inputTitulo} onChange={alterarTitulo}/>            
+            <input placeholder="Ex: Lista de compras ou Mercado, Tarefas, Convidados, Chá de bebê da Marisa, etc." value={inputTitulo} onChange={atribuiTitulo} />      
+                      
+            <button>Enviar</button>              
           </form>
 
 
-          <form onSubmit={adicionarItem}>
-
-          <input placeholder="Digite um item da sua lista" value={inputItem} onChange={atribuiItem} />
-                    
-          <button>Enviar</button>
+            <form onSubmit={adicionarItem}>
+            <label>Escreva o item a ser adicionado na lista</label><br />
+            <input placeholder="Digite um item da sua lista" value={inputItem} onChange={atribuiItem} />
+                      
+            <button>Enviar</button>
           </form>
+
+          <br />
+          <hr />
         </Col>
 
         <Col md="8">
